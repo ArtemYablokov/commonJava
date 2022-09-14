@@ -3,23 +3,24 @@ package com.yablokovs.multithreading.forkjoinpool;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class FJTaskFactorial extends RecursiveTask<Integer> {
-
 
     @SneakyThrows
     public static void main(String[] args) {
 
         ForkJoinPool forkJoinPool = new ForkJoinPool();
 
-        FJTaskFactorial calculator = new FJTaskFactorial(10);
+        FJTaskFactorial fjTaskFactorial = new FJTaskFactorial(4);
 
-        forkJoinPool.execute(calculator);
+        forkJoinPool.execute(fjTaskFactorial);
 
-        Integer compute = calculator.get();
+        while (!fjTaskFactorial.isDone()) {
+        }
 
-        System.out.println(compute);
-
+        log.info("Factorial of {} = " + fjTaskFactorial.get(), 4);
     }
 
 
@@ -38,13 +39,9 @@ public class FJTaskFactorial extends RecursiveTask<Integer> {
         if (n <= 1) {
             return n;
         }
-
-        FJTaskFactorial calculator
-                = new FJTaskFactorial(n - 1);
-
+        FJTaskFactorial calculator = new FJTaskFactorial(n - 1);
         calculator.fork();
-
-        return n + calculator.join();
+        return n * calculator.join();
     }
 
 }
