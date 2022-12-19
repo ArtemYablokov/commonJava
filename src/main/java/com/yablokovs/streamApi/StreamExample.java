@@ -52,7 +52,6 @@ public class StreamExample {
         int i = max.orElse(0);
         max.orElseGet(() -> 0);
 
-        // collect = intStream.collect(() -> a, 0, (a,b) -> {});
     }
 
     public static Integer multiplyStreamEntries(Stream<Integer> integerStream) {

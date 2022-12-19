@@ -9,6 +9,7 @@ public class ComparatorEx {
 
         Stream<String> sorted = Stream.of("", " ").sorted(String::compareToIgnoreCase);
         Stream<String> sorted3 = Stream.of("", " ").sorted(Comparator.reverseOrder());
+        Stream<String> sorted4 = Stream.of("", " ").sorted(Comparator.naturalOrder());
 
         Stream<String> sorted2 = Stream.of("", " ").sorted(Comparator.comparing(String::length));
 
